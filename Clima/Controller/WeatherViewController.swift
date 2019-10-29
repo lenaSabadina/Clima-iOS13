@@ -45,7 +45,7 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
         if let city = searchTextField.text {
             weatherManager.fetchWeather(cityName: city)
         }
-//        cityLabel.text = searchTextField.text
+        cityLabel.text = searchTextField.text
         searchTextField.text = ""
     }
     
