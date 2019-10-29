@@ -2,8 +2,8 @@
 //  ViewController.swift
 //  Clima
 //
-//  Created by Angela Yu on 01/09/2019.
-//  Copyright © 2019 App Brewery. All rights reserved.
+//  Created by Lena Sabadina on 2019-10-29.
+//  Copyright © 2019 Whiskerz AB. All rights reserved.
 //
 
 import UIKit
@@ -14,6 +14,8 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var temperatureLabel: UILabel!
     @IBOutlet weak var cityLabel: UILabel!
     @IBOutlet weak var searchTextField: UITextField!
+    
+    var weatherManager = WeatherManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,7 +42,10 @@ class WeatherViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        cityLabel.text = searchTextField.text
+        if let city = searchTextField.text {
+            weatherManager.fetchWeather(cityName: city)
+        }
+//        cityLabel.text = searchTextField.text
         searchTextField.text = ""
     }
     
