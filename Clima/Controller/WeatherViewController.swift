@@ -32,7 +32,7 @@ class WeatherViewController: UIViewController {
     }
     
     @IBAction func locationTapped(_ sender: UIButton) {
-        
+        locationManager.requestLocation()
     }
     
 }
@@ -92,7 +92,6 @@ extension WeatherViewController: CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
             locationManager.stopUpdatingLocation()
-            locationManager.delegate = nil
             
             let lon = location.coordinate.longitude
             let lat = location.coordinate.latitude
