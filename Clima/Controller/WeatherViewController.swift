@@ -55,4 +55,3 @@ class WeatherViewController: UIViewController, UITextFieldDelegate, WeatherManag
         print(weather.temperature)
     }
 }
-
