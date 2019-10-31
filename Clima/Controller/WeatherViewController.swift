@@ -22,6 +22,13 @@ class WeatherViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+           tap.cancelsTouchesInView = false
+           view.addGestureRecognizer(tap)
+         }
+        @objc func dismissKeyboard() {
+           view.endEditing(true)
+            
         weatherManager.delegate = self
         searchTextField.delegate = self
         
@@ -34,7 +41,6 @@ class WeatherViewController: UIViewController {
     @IBAction func locationTapped(_ sender: UIButton) {
         locationManager.requestLocation()
     }
-    
 }
 
 //MARK: - UITextFieldDelegate
@@ -66,6 +72,8 @@ extension WeatherViewController: UITextFieldDelegate {
         cityLabel.text = searchTextField.text
         searchTextField.text = ""
     }
+    
+    
 }
 
 //MARK: - WeatherManagerDelegate
@@ -82,6 +90,11 @@ extension WeatherViewController: WeatherManagerDelegate {
     
     func didFailWithError(error: Error) {
         print(error)
+        DispatchQueue.main.async {
+            self.cityLabel.text = "Location Unavailable"
+            self.temperatureLabel.text = "---"
+        }
+        
     }
 }
 
@@ -101,6 +114,5 @@ extension WeatherViewController: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
         print(error)
-        cityLabel.text = "Location Unavailable"
     }
 }
